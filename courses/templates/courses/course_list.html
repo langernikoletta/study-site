@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Навчайся легко — Курси історії</title>
+    
+    <link rel="stylesheet" href="{% static 'courses/css/style.css' %}">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">🎓 Навчайся легко</div>
+            <nav class="nav-links">
+                <a href="#">Головна</a>
+                <a href="#">Курси</a>
+                <a href="/admin/" class="btn-login">Вхід</a>
+                <a href="#" class="btn-register">Реєстрація</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-text">
+            <h1>Навчайся легко</h1>
+            <p>Освіта, яка тобі сподобається! Інтерактивні курси з історії для 7-11 класів.</p>
+            <div class="hero-btns">
+                <a href="#" class="btn-primary">▶ Почати навчання</a>
+                <a href="#" class="btn-secondary">+ Зареєструватись</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <span style="font-size: 100px;">📖🎓🧠</span>
+        </div>
+    </section>
+
+    <main class="container">
+        <h2 class="section-title">Популярні курси</h2>
+        
+        <div class="courses-grid">
+            {% for lesson in lessons %}
+                <div class="course-card">
+                    <div class="card-icon">💻</div>
+                    <h3>{{ lesson.title }}</h3>
+                    <p>Підготовка для {{ lesson.school_class }} класу</p>
+                    <a href="#" class="btn-card">Перейти</a>
+                </div>
+            {% empty %}
+                <div class="empty-state">
+                    <p>Тут поки порожньо. Додай першу тему в <a href="/admin/">адмін-панелі</a>!</p>
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>© 2026 Навчайся легко | Вчися круто та весело! 🚀</p>
+    </footer>
+
+</body>
+</html>
