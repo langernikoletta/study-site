@@ -43,6 +43,18 @@ body {
     margin-bottom: 10px;
 }
 
+.hero h2 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.section-title {
+    padding-left: 100px; /* Це посуне текст вправо на 100 пікселів */
+    margin-top: 40px;    /* Додасть трохи простору зверху */
+    margin-bottom: 20px; /* Додасть простір до карток знизу */
+    font-weight: 700;
+}
+
 .btn-primary {
     background-color: #007bff;
     color: white;
@@ -94,3 +106,5 @@ body {
     font-size: 14px;
     border-top: 1px solid #eee;
 }
+
+.btn-logout:hover { text-decoration: underline; color: #ff0000; }

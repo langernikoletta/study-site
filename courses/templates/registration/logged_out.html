@@ -1,0 +1,13 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Вихід — Навчайся легко</title>
+    <link rel="stylesheet" href="{% static 'courses/css/style.css' %}">
+</head>
+<body style="text-align: center; padding-top: 100px; font-family: 'Inter', sans-serif;">
+    <h1>До зустрічі! 👋</h1>
+    <p>Ви успішно вийшли зі свого акаунта.</p>
+    <a href="{% url 'course_list' %}" class="btn-primary">Повернутися на головну</a>
+</body>
+</html>

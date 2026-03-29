@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Реєстрація — Навчайся легко</title>
+    <link rel="stylesheet" href="{% static 'courses/css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        .auth-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f4f7f6;
+        }
+        .auth-card {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .auth-card h2 { margin-bottom: 20px; font-size: 24px; }
+        .auth-card form p { text-align: left; margin-bottom: 15px; }
+        .auth-card input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box; /* Щоб інпути не вилазили за краї */
+        }
+        .btn-auth {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .btn-auth:hover { background-color: #0056b3; }
+        .auth-footer { margin-top: 20px; font-size: 14px; color: #666; }
+    </style>
+</head>
+<body>
+
+    <div class="auth-container">
+        <div class="auth-card">
+            <h2>Створити акаунт 🎓</h2>
+            <form method="post">
+                {% csrf_token %}
+                
+                {% for field in form %}
+                    <p>
+                        {{ field.label_tag }}<br>
+                        {{ field }}
+                        {% if field.help_text %}
+                            <small style="color: #888; display: block; margin-top: 5px;">{{ field.help_text }}</small>
+                        {% endif %}
+                        {% for error in field.errors %}
+                            <span style="color: red; font-size: 12px;">{{ error }}</span>
+                        {% endfor %}
+                    </p>
+                {% endfor %}
+
+                <button type="submit" class="btn-auth">Зареєструватися</button>
+            </form>
+
+            <div class="auth-footer">
+                Вже маєш акаунт? <a href="{% url 'login' %}" style="color: #007bff; text-decoration: none;">Увійти</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

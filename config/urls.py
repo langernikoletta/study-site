@@ -17,8 +17,11 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
+from courses.views import register
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('courses.urls')), # Тепер курси будуть за адресою /courses/
+    path('accounts/', include('django.contrib.auth.urls')), # Це додає /login/ та /logout/ автоматично
+    path('accounts/register/', register, name='register'),
+    path('', include('courses.urls')),
 ]

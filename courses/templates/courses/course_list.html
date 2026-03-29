@@ -5,9 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Навчайся легко — Курси історії</title>
-    
     <link rel="stylesheet" href="{% static 'courses/css/style.css' %}">
-    
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -16,11 +14,20 @@
         <div class="header-content">
             <div class="logo">🎓 Навчайся легко</div>
             <nav class="nav-links">
-                <a href="#">Головна</a>
+                <a href="{% url 'course_list' %}">Головна</a>
                 <a href="#">Курси</a>
-                <a href="/admin/" class="btn-login">Вхід</a>
-                <a href="#" class="btn-register">Реєстрація</a>
-            </div>
+
+                {% if user.is_authenticated %}
+                    <span style="color: #ffcc00; margin-left: 15px; font-weight: bold;">👋 Привіт, {{ user.username }}!</span>
+                    <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-logout" style="background: none; border: none; color: #ff4d4d; cursor: pointer; margin-left: 10px; font-weight: 600;">Вийти</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'login' %}" class="btn-login">Вхід</a>
+                    <a href="{% url 'register' %}" class="btn-register">Реєстрація</a>
+                {% endif %}
+            </nav>
         </div>
     </header>
 
@@ -30,7 +37,9 @@
             <p>Освіта, яка тобі сподобається! Інтерактивні курси з історії для 7-11 класів.</p>
             <div class="hero-btns">
                 <a href="#" class="btn-primary">▶ Почати навчання</a>
-                <a href="#" class="btn-secondary">+ Зареєструватись</a>
+                {% if not user.is_authenticated %}
+                    <a href="{% url 'register' %}" class="btn-secondary">+ Зареєструватись</a>
+                {% endif %}
             </div>
         </div>
         <div class="hero-image">
