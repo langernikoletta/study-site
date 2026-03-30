@@ -108,3 +108,33 @@ body {
 }
 
 .btn-logout:hover { text-decoration: underline; color: #ff0000; }
+
+.class-filter-container {
+    padding: 20px 40px;
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap; /* Щоб кнопки переносились на мобілках */
+}
+
+.btn-filter {
+    padding: 10px 20px;
+    background-color: #f0f0f0;
+    color: #333;
+    text-decoration: none;
+    border-radius: 25px;
+    font-size: 14px;
+    transition: 0.3s;
+    border: 1px solid transparent;
+}
+
+.btn-filter:hover {
+    background-color: #007bff;
+    color: white;
+    border-color: #0056b3;
+}
