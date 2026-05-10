@@ -22,6 +22,6 @@ from courses.views import register
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')), # Це додає /login/ та /logout/ автоматично
-    path('accounts/register/', register, name='register'),
     path('', include('courses.urls')),
+    path('register/', register, name='register'),
 ]

@@ -18,14 +18,13 @@
                 <a href="#">Курси</a>
 
                 {% if user.is_authenticated %}
-                    <span style="color: #ffcc00; margin-left: 15px; font-weight: bold;">👋 Привіт, {{ user.username }}!</span>
+                    <span style="color: #ffe479; margin-left: 15px; font-weight: bold;">👋 Привіт, {{ user.username }}!</span>
                     <form action="{% url 'logout' %}" method="post" style="display: inline;">
                         {% csrf_token %}
                         <button type="submit" class="btn-logout" style="background: none; border: none; color: #ff4d4d; cursor: pointer; margin-left: 10px; font-weight: 600;">Вийти</button>
                     </form>
                 {% else %}
                     <a href="{% url 'login' %}" class="btn-login">Вхід</a>
-                    <a href="{% url 'register' %}" class="btn-register">Реєстрація</a>
                 {% endif %}
             </nav>
         </div>
@@ -56,7 +55,7 @@
                     <div class="card-icon">💻</div>
                     <h3>{{ lesson.title }}</h3>
                     <p>Підготовка для {{ lesson.school_class }} класу</p>
-                    <a href="#" class="btn-card">Перейти</a>
+                    <a href="{% url 'lesson_detail' lesson.id %}" class="btn-more">Перейти</a>
                 </div>
             {% empty %}
                 <div class="empty-state">

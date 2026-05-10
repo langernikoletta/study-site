@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Навчайся легко{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'courses/css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">🎓 Навчайся легко</div>
+            <nav class="nav-links">
+                <a href="{% url 'course_list' %}">Головна</a>
+                {% if user.is_authenticated %}
+                    <span style="color: #ffcc00; font-weight: bold;">👋 {{ user.username }}</span>
+                    <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-logout" style="background:none; border:none; color:#ff4d4d; cursor:pointer;">Вийти</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'login' %}">Вхід</a>
+                    <a href="{% url 'register' %}">Реєстрація</a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="footer">
+        <p>© 2026 Навчайся легко | Вчися круто! 🚀</p>
+    </footer>
+</body>
+</html>
