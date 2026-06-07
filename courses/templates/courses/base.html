@@ -1,0 +1,126 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Навчайся легко{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'courses/css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">🎓 Навчайся легко</div>
+            <nav class="nav-links">
+                <a href="{% url 'course_list' %}">Головна</a>
+                {% if user.is_authenticated %}
+                    <span style="color: #ffcc00; font-weight: bold;">👋 {{ user.username }}</span>
+                    <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-logout" style="background:none; border:none; color:#ff4d4d; cursor:pointer;">Вийти</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'login' %}">Вхід</a>
+                    <a href="{% url 'register' %}">Реєстрація</a>
+                    <button id="theme-toggle" style="
+    position: fixed; 
+    bottom: 20px; 
+    right: 20px; 
+    background: #007bff; 
+    color: white; 
+    border: none; 
+    width: 50px; 
+    height: 50px; 
+    border-radius: 50%; 
+    font-size: 24px; 
+    cursor: pointer; 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2); 
+    z-index: 9999; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    transition: transform 0.2s;">
+    🌙
+</button>
+    🌙
+</button>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+
+
+
+    <nav style="background-color: #ffffff; padding: 15px 30px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center;">
+    <a href="{% url 'course_list' %}" style="font-size: 20px; font-weight: bold; color: #007bff; text-decoration: none;">📚 Навчальний Сайт</a>
+
+    <div style="display: flex; align-items: center; gap: 20px;">
+        <a href="{% url 'course_list' %}" style="color: #333; text-decoration: none; font-weight: 500;">Головна</a>
+
+        {% if user.is_authenticated %}
+            <a href="{% url 'profile' %}" style="display: flex; align-items: center; gap: 8px; color: #333; text-decoration: none; font-weight: 500;">
+                {% if user.profile.avatar %}
+                    <img src="{{ user.profile.avatar.url }}" alt="Аватар" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover; border: 2px solid #007bff;">
+                {% else %}
+                    👤
+                {% endif %}
+                Мій профіль ({{ user.username }})
+            </a>
+            
+            <a href="{% url 'logout' %}" style="color: #dc3545; text-decoration: none; font-weight: 500;">Вийти</a>
+        {% else %}
+            <a href="{% url 'login' %}" style="color: #007bff; text-decoration: none; font-weight: 500;">Вхід</a>
+            <a href="{% url 'register' %}" style="background: #007bff; color: white; padding: 8px 16px; border-radius: 5px; text-decoration: none; font-weight: bold;">Реєстрація</a>
+        {% endif %}
+    </div>
+</nav>
+
+
+
+
+    <footer class="footer">
+        <p>© 2026 Навчайся легко | Вчися круто! 🚀</p>
+    </footer>
+    <script>
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const currentTheme = localStorage.getItem('theme');
+
+    if (currentTheme === 'dark') {
+        document.body.classList.add('dark-theme');
+        themeToggleBtn.textContent = '☀️'; # Міняємо іконку на сонечко
+    }
+<script>
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const currentTheme = localStorage.getItem('theme');
+
+    if (currentTheme === 'dark') {
+        document.body.classList.add('dark-theme');
+        themeToggleBtn.textContent = '☀️';
+        themeToggleBtn.style.background = '#ffc107';
+    }
+
+    themeToggleBtn.addEventListener('click', function () {
+        document.body.classList.toggle('dark-theme');
+        
+        let theme = 'light';
+        if (document.body.classList.contains('dark-theme')) {
+            theme = 'dark';
+            themeToggleBtn.textContent = '☀️';
+            themeToggleBtn.style.background = '#ffc107';
+        } else {
+            themeToggleBtn.textContent = '🌙';
+            themeToggleBtn.style.background = '#007bff';
+        }
+        
+        localStorage.setItem('theme', theme);
+    });
+</script>
+</body>
+</html>

@@ -17,6 +17,22 @@
                 <a href="{% url 'course_list' %}">Головна</a>
                 <a href="#">Курси</a>
 
+                <div style="background: #ffffff; padding: 15px; margin-bottom: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center;">
+    <span style="font-weight: bold; color: #007bff;">🎓 Моя навчальна платформа</span>
+    
+    <div>
+        {% if user.is_authenticated %}
+            <a href="{% url 'profile' %}" style="margin-right: 15px; text-decoration: none; font-weight: bold; color: #28a745;">
+                👤 Мій профіль ({{ user.username }})
+            </a>
+            <a href="{% url 'logout' %}" style="text-decoration: none; color: #dc3545;">Вийти</a>
+        {% else %}
+            <a href="{% url 'login' %}" style="margin-right: 15px; text-decoration: none; color: #007bff;">Вхід</a>
+            <a href="{% url 'register' %}" style="text-decoration: none; background: #007bff; color: white; padding: 5px 10px; border-radius: 4px;">Реєстрація</a>
+        {% endif %}
+    </div>
+</div>
+
                 {% if user.is_authenticated %}
                     <span style="color: #ffe479; margin-left: 15px; font-weight: bold;">👋 Привіт, {{ user.username }}!</span>
                     <form action="{% url 'logout' %}" method="post" style="display: inline;">

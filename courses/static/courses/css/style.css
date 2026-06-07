@@ -138,3 +138,34 @@ body {
     color: white;
     border-color: #0056b3;
 }
+
+
+/* Стилі за замовчуванням (Світла тема) */
+body {
+    background-color: #f4f6f9;
+    color: #333333;
+    transition: background-color 0.3s, color 0.3s; 
+}
+
+
+body.dark-theme {
+    background-color: #121212 !important;
+    color: #f5f5f5 !important;
+}
+
+
+body.dark-theme .container, 
+body.dark-theme .card {
+    background-color: #1e1e1e !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 6px rgba(255, 255, 255, 0.05) !important;
+}
+
+
+body.dark-theme hr {
+    border-top: 1px solid #333 !important;
+}
+
+body.dark-theme .lesson-content a {
+    color: #39a0ff !important;
+}
